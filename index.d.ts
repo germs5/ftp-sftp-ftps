@@ -10,7 +10,7 @@ export declare class FileSystem {
 
   list(path: string): Promise<FileInfo[]>;
   /**
-   * 
+   *
    * @param src the data to put
    * returns the value of the FileSystem's put function.
    * Promise returns anything (maybe even null) if successful
@@ -20,7 +20,7 @@ export declare class FileSystem {
   get(path: string): Promise<NodeJS.ReadableStream>;
 
   /**
-   * 
+   *
    * @param path path to create the directory
    * @param recursive Whether subdirectories need to be created
    * Creates a directory at the specified path
@@ -29,7 +29,7 @@ export declare class FileSystem {
   mkdir(path: string, recursive: boolean): Promise<any>;
 
   /**
-   * 
+   *
    * @param path path to delete the directory
    * @param recursive Whether subdirectories need to be deleted
    * Deletes the directory at the specified path.
@@ -38,14 +38,14 @@ export declare class FileSystem {
   rmdir(path: string, recursive: boolean): Promise<any>;
 
   /**
-   * 
+   *
    * @param path file to delete
    * Promise returns anything (maybe even null) if successful
    */
   delete(path: string): Promise<any>;
 
   /**
-   * 
+   *
    * @param oldPath the path of the file/directory to rename
    * @param newPath the new path where the file/directory should be renamed/moved to
    * This operation can be used to simply rename or to move a file/directory
@@ -54,6 +54,18 @@ export declare class FileSystem {
    * Example 3: rename('/User/someFile.txt', '/User/someDirectory/someNewName.txt) move and rename the file
    */
   rename(oldPath: string, newPath: string): Promise<any>;
+
+  /**
+   *
+   * Returns the current working directory
+   */
+  cwd(): Promise<String>;
+
+  /**
+   *
+   * Closes the connection to the server
+   */
+  end(): Promise<any>;
 
 }
 
@@ -83,7 +95,7 @@ export declare class LocalFileSystem extends FileSystem {
 export declare class FtpFileSystem extends FileSystem {
 
   /**
-   * 
+   *
    * @param host the FTP host
    * @param port the FTP port
    * @param user the FTP username
@@ -103,7 +115,7 @@ export declare class FtpFileSystem extends FileSystem {
 export declare class SftpFileSystem extends FileSystem {
 
   /**
-   * 
+   *
    * @param host the SFTP host
    * @param port the SFTP port
    * @param user the SFTP username
