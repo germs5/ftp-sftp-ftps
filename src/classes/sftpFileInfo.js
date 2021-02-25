@@ -1,3 +1,5 @@
+const FileInfo = require('./fileInfo');
+
 class SftpFileInfo extends FileInfo {
   constructor(original) {
     super(original);
