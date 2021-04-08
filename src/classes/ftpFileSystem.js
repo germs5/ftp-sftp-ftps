@@ -8,7 +8,7 @@ class FtpFileSystem extends FileSystem {
     this.client = client;
   }
 
-  static async create(host, port, user, password) {
+  static async create(host, port, user, password, secure = false, secureOptions = {}) {
     const c = new FtpClient();
     return new Promise((resolve, reject) => {
       c.on('ready', () => {
@@ -22,6 +22,8 @@ class FtpFileSystem extends FileSystem {
         port,
         user,
         password,
+        secure,
+        secureOptions,
       });
     });
   }
