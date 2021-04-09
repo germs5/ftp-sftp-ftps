@@ -11,11 +11,15 @@ class SftpFileSystem extends FileSystem {
   static async create(host, port, user, password) {
     const c = new SftpClient();
     return new Promise((resolve, reject) => {
+      c.on('keyboard-interactive', (name, instructions, instructionsLang, prompts, finish) => {
+        finish([password]);
+      });
       c.connect({
         host,
         port,
         username: user,
         password,
+        tryKeyboard: true,
       }).then(() => {
         resolve(new SftpFileSystem(c));
       }).catch((err) => {
