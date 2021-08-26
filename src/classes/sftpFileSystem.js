@@ -8,7 +8,7 @@ class SftpFileSystem extends FileSystem {
     this.client = client;
   }
 
-  static async create(host, port, user, password, options = {}) {
+  static async create(host, port, user, password, advancedOptions = {}) {
     const c = new SftpClient();
     return new Promise((resolve, reject) => {
       c.on('keyboard-interactive', (name, instructions, instructionsLang, prompts, finish) => {
@@ -20,7 +20,7 @@ class SftpFileSystem extends FileSystem {
         username: user,
         password,
         tryKeyboard: true,
-        ...options,
+        ...advancedOptions,
       }).then(() => {
         resolve(new SftpFileSystem(c));
       }).catch((err) => {
