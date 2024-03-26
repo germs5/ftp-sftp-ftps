@@ -1,4 +1,4 @@
-const FtpClient = require('basic-ftp');
+const { Client: FtpClient } = require('basic-ftp');
 const FtpFileInfo = require('./ftpFileInfo');
 const FileSystem = require('./fileSystem');
 const { Writable, PassThrough } = require('stream');
