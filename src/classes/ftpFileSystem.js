@@ -1,6 +1,8 @@
-const FtpClient = require('ftp');
+const FtpClient = require('basic-ftp');
 const FtpFileInfo = require('./ftpFileInfo');
 const FileSystem = require('./fileSystem');
+const { Writable, PassThrough } = require('stream');
+const MemoryStream = require('memory-streams');
 
 class FtpFileSystem extends FileSystem {
   constructor(client) {
@@ -41,7 +43,7 @@ class FtpFileSystem extends FileSystem {
 
   put(src, toPath) {
     return new Promise((resolve, reject) => {
-      this.client.put(src, toPath, (err) => {
+      this.client.uploadFrom(src, toPath, (err) => {
         if (err) {
           reject(err);
         }
@@ -51,13 +53,21 @@ class FtpFileSystem extends FileSystem {
   }
 
   get(path) {
+    const writableStream = new Writable();
+    const bufferStream = new MemoryStream();
+    const readableStream = new PassThrough();
+
+    writableStream.pipe(bufferStream);
+
     return new Promise((resolve, reject) => {
-      this.client.get(path, (err, stream) => {
-        if (err) {
-          return reject(err);
-        }
-        resolve(stream);
+      writableStream.on('finish', () => {
+        readableStream.push(bufferStream.buffer);
+        readableStream.push(null); // signal end of stream
+        resolve(readableStream);
       });
+      writableStream.on('error', reject);
+      writableStream.write(data);
+      writableStream.end();
     });
   }
 

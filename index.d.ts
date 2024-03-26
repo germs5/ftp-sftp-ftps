@@ -89,7 +89,7 @@ export declare class LocalFileSystem extends FileSystem {
 
 /**
  * This is a wrapper for the FTP library
- * (a wrapper for require('ftp'))
+ * (a wrapper for require('basic-ftp'))
  * You must instantiate it using the function FtpFileSystem.create()
  */
 export declare class FtpFileSystem extends FileSystem {

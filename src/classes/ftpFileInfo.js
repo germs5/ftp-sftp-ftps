@@ -5,7 +5,7 @@ class FtpFileInfo extends FileInfo {
     super(original)
   }
   isDirectory() {
-    return this.original.type === 'd'
+    return this.original.type === 2
   }
 }
 

@@ -13,7 +13,7 @@ ftp-sftp-example](https://github.com/Mylogo/ftp-sftp-example)
 
 ## Installation
 
-    npm i ftp-sftp
+    npm i ftp-sftp-ftps
 
 ## Overview
 class hierarchy
